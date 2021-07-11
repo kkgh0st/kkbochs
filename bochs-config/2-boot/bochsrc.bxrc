@@ -1,0 +1,45 @@
+###############################################################
+# bochs-2.6.11 版本的配置文件
+# 注意: 
+#   1.在 romimage  vgaromimage keyboard 中使用绝对路径，
+#       如果使用默认的$BXSHARE可能会出现问题(我的就出现了问题，路径不对),
+#       如果出现问题，使用绝对路径，其要使用的三个路径如下:
+#       romimage --> bochs\bios\BIOS-bochs-latest
+#       vgaromimage --> bochs\bios\VGABIOS-lgpl-latest
+#       keyboard --> bochs\gui\keymaps\x11-pc-us.map
+#
+#   2. bochs识别的路径分隔符是使用 '/' (Linux版本)，而Windows版本的是 '\'，
+#       如果Windows环境下直接复制粘贴路径，则默认是'\'，bochs识别错误，
+#       不修改的话会引起路径错误。
+#       所以，一定要修改 '\' 为 '/'!!!!
+#  
+###############################################################
+
+# This option sets the 'guest' and 'host' memory parameters to the same value.
+megs: 32
+
+# The ROM BIOS,负责BIOS启动的,我们这里直接使用系统自带的，后期或许可以自己编写BIOS来启动。
+romimage: file= D:/code/bochs-project/bochs-src/bios/BIOS-bochs-latest
+
+# A VGA BIOS, 应该是显示接口，使用系统自带的。
+vgaromimage: file= D:/code/bochs-project/bochs-src/bios/VGABIOS-lgpl-latest
+
+# what disk images will be used 
+# 填写我们之前编写的软盘路径。
+floppya: 1_44=D:/code/bochs-project/code/2-boot_code/a.img, status=inserted
+
+# choose the boot disk.
+# 这里设置软盘启动，与上面对应。
+boot: floppy
+
+# where do we send log messages?
+# 这个暂时不需要启动日志输出，记得这个输出文件相当大。
+# log: bochsout.txt
+
+# disable the mouse, since Finix is text only
+# 不需要键盘，我们现在只是文本启动。
+mouse: enabled=0
+
+# enable key mapping, using US layout as default.
+# 使用系统自带的键盘设置。
+keyboard: keymap=D:/code/bochs-project/bochs-src/gui/keymaps/x11-pc-us.map
